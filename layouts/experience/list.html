@@ -1,20 +1,60 @@
 {{ define "main" }}
 <section class="measure center">
-  <h1>Experience</h1>
+  <h1>{{ .Title }}</h1>
+
+  {{ if .Params.summary }}
+    <p>{{ .Params.summary }}</p>
+  {{ end }}
+
   <ul>
     {{ range .Pages.ByDate.Reverse }}
       <li>
         <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+
+        {{ if .Params.location }}
+          <p><strong>Location:</strong> {{ .Params.location }}</p>
+        {{ end }}
+
+        {{ if .Params.companies }}
+          <p><strong>Company:</strong>
+
+            {{ $companies := .Params.companies }}
+            {{ $length := len $companies }}
+
+            {{ range $index, $company := $companies }}  
+              {{ if $company.url }}
+                <a href="{{ $company.url }}" target="_blank">{{ $company.name }}</a>
+              {{ else }}
+                {{ $company.name }}
+              {{ end }}
+              
+              {{ if and (lt (add $index 1) $length) (gt $length 1) }}
+                ,
+              {{ end }}
+
+            {{ end }}
+          </p>
+        {{ else }}
+          <p><strong>Company:</strong> No companies listed.</p>
+        {{ end }}
+
         <p>
-          <strong>Company:</strong> {{ .Params.company }}<br>
-          <strong>Location:</strong> {{ .Params.location }}<br>
           <strong>Time Period:</strong>
-          {{ .Date.Format "Jan 2006" }} –
+          {{ .Date.Format "Jan 2006" }} – 
           {{ with .Params.endDate }}{{ . | time.Format "Jan 2006" }}{{ else }}Present{{ end }}
         </p>
-        <p>{{ .Summary }}</p>
+
+        {{ if .Summary }}
+          <p>{{ .Summary }}</p>
+        {{ else }}
+          <p>{{ .Params.summary | default "No summary available." }}</p>
+        {{ end }}
       </li>
     {{ end }}
   </ul>
+  {{ if .Site.Params.debug }}
+  {{ partial "debug.html" . }}
+{{ end }}
+
 </section>
 {{ end }}

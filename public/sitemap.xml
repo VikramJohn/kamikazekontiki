@@ -14,16 +14,13 @@
     <loc>http://localhost:1313/shorts/</loc>
     <lastmod>2025-04-20T00:38:19+05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/experience/my_sailing_days/</loc>
-    <lastmod>2025-05-04T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2025-05-04T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/about/about/</loc>
     <lastmod>2025-05-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/about/about2/</loc>
+    <lastmod>2025-05-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2025-05-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/professional-declarations/third-post/</loc>

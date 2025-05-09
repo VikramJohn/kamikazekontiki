@@ -1,9 +1,13 @@
 +++
 title = "Maritime Engineer aka Sailor"
-company = "Wilhlemsen Management, Campbell Shipping Corporation"
+location = "The high seas"
+companies = [
+  { name = "Wilhelmsen", url = "https://www.wilhelmsen.com" },
+  { name = "Campbell Shipping", url = "https://csship.com" }
+]
 date = 2007-06-07
 endDate = 2011-07-07
-summary = "SSailed the seven seas, yes, all of them"
+summary = "Sailed the seven seas, yes, all of them"
 draft = true
 +++
 

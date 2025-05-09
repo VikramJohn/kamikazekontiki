@@ -3,8 +3,35 @@
   <h1>{{ .Title }}</h1>
 
   <p>
-    <strong>Company:</strong> {{ .Params.company }}<br>
-    <strong>Location:</strong> {{ .Params.location }}<br>
+    <strong>Location:</strong> {{ .Params.location | default "Not specified" }}
+  </p>
+
+  <p>
+    <strong>Companies:</strong> 
+    {{ if .Params.companies }}
+      {{ $companies := .Params.companies }}
+      {{ $length := len $companies }}
+
+      {{ range $index, $company := $companies }}
+
+        {{ if $company.url }}
+          <a href="{{ $company.url }}" target="_blank">{{ $company.name }}</a>
+        {{ else }}
+          {{ $company.name }}
+        {{ end }}
+
+        {{ if and (lt (add $index 1) $length) (gt $length 1) }}
+          ,  
+        {{ end }}
+
+      {{ end }}
+
+    {{ else }}
+      No companies listed.
+    {{ end }}
+  </p>
+
+  <p>
     <strong>Time Period:</strong>
     {{ .Date.Format "Jan 2006" }} – 
     {{ with .Params.endDate }}{{ . | time.Format "Jan 2006" }}{{ else }}Present{{ end }}
@@ -15,5 +42,10 @@
   <div class="content">
     {{ .Content }}
   </div>
+
+  {{ if .Site.Params.debug }}
+  {{ partial "debug.html" . }}
+{{ end }}
+
 </article>
 {{ end }}

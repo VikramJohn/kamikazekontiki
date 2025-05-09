@@ -3,3 +3,5 @@ languageCode = 'en-us'
 title = 'Kamikaze Kon-tiki'
 theme = 'ananke'
 copyright = "Vikram John"
+[params]
+debug = false

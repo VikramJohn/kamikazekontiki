@@ -1,0 +1,73 @@
+<div class="debug-info" style="background-color: #f0f0f0; padding: 1rem; margin-top: 1rem; border-left: 4px solid #ff5733;">
+    <h3>Debug Information</h3>
+  
+    <!-- Title -->
+    <p>Title: {{ .Title | default "No title provided" }}</p>
+  
+    <!-- Location -->
+    <p>Location: {{ .Params.location | default "Location not specified" }}</p>
+  
+    <!-- Companies Debugging -->
+    <h4>Companies:</h4>
+    {{ if .Params.companies }}
+      {{ $companies := .Params.companies }}
+      {{ $length := len $companies }}
+      
+      <p>Total Companies: {{ $length }}</p>
+  
+      {{ if eq $length 0 }}
+        <p style="color: red;">Warning: Companies array is present but empty.</p>
+      {{ else }}
+        {{ range $index, $company := $companies }}
+          <div style="border-bottom: 1px dashed #ccc; padding-bottom: 0.5rem; margin-bottom: 0.5rem;">
+            <p>Index: {{ $index }}</p>
+  
+            <!-- Check for URL and Name -->
+            <p>
+              Company Name: {{ $company.name | default "No name provided" }}  
+              {{ if not $company.name }}
+                <span style="color: red;">[ERROR: Missing company name]</span>
+              {{ end }}
+            </p>
+  
+            <p>
+              Company URL: {{ $company.url | default "No URL provided" }}  
+              {{ if not $company.url }}
+                <span style="color: orange;">[Warning: Missing company URL]</span>
+              {{ end }}
+            </p>
+  
+            <!-- Comma Logic Check -->
+            <p>Is Last Item: {{ eq $index (sub $length 1) }}</p>
+            <p>Comma Logic: {{ if lt $index (sub $length 1) }} Yes {{ else }} No {{ end }}</p>
+          </div>
+        {{ end }}
+      {{ end }}
+    {{ else }}
+      <p style="color: red;">Error: Companies parameter not found.</p>
+    {{ end }}
+  
+    <!-- Time Period Debugging -->
+    <h4>Time Period:</h4>
+    <p>Start Date: {{ .Date.Format "Jan 2006" | default "Start date not provided" }}</p>
+    <p>
+      End Date: 
+      {{ with .Params.endDate }}
+        {{ . | time.Format "Jan 2006" }}
+      {{ else }}
+        Present
+      {{ end }}
+    </p>
+  
+    <!-- Summary -->
+    <h4>Summary:</h4>
+    <p>{{ .Params.summary | default "No summary provided." }}</p>
+  
+    <!-- Debugging Metadata -->
+    <h4>Metadata:</h4>
+    <p>Content Type: {{ .Type }}</p>
+    <p>File Path: {{ .File.Path }}</p>
+    <p>Slug: {{ .File.Slug }}</p>
+    <p>Section: {{ .Section }}</p>
+  </div>
+  
