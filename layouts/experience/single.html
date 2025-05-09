@@ -1,0 +1,19 @@
+{{ define "main" }}
+<article class="measure center">
+  <h1>{{ .Title }}</h1>
+
+  <p>
+    <strong>Company:</strong> {{ .Params.company }}<br>
+    <strong>Location:</strong> {{ .Params.location }}<br>
+    <strong>Time Period:</strong>
+    {{ .Date.Format "Jan 2006" }} – 
+    {{ with .Params.endDate }}{{ . | time.Format "Jan 2006" }}{{ else }}Present{{ end }}
+  </p>
+
+  <hr>
+
+  <div class="content">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}

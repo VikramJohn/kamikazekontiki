@@ -1,0 +1,20 @@
+{{ define "main" }}
+<section class="measure center">
+  <h1>Experience</h1>
+  <ul>
+    {{ range .Pages.ByDate.Reverse }}
+      <li>
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <p>
+          <strong>Company:</strong> {{ .Params.company }}<br>
+          <strong>Location:</strong> {{ .Params.location }}<br>
+          <strong>Time Period:</strong>
+          {{ .Date.Format "Jan 2006" }} –
+          {{ with .Params.endDate }}{{ . | time.Format "Jan 2006" }}{{ else }}Present{{ end }}
+        </p>
+        <p>{{ .Summary }}</p>
+      </li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}

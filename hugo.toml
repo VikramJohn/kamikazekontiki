@@ -1,0 +1,5 @@
+baseURL = 'https://myplaceholdersite.com/'
+languageCode = 'en-us'
+title = 'Kamikaze Kon-tiki'
+theme = 'ananke'
+copyright = "Vikram John"
